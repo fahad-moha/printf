@@ -10,6 +10,12 @@ int _puts(char *str)
 {
 	int i;
 
+	if (str == NULL)
+	{
+		_puts("(null)");
+		return (6);
+	}
+
 	for (i = 0; str[i]; i++)
 		_putchar(str[i]);
 

@@ -11,14 +11,15 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int count = 0, num;
+	int count = 0;
+	char *str;
 	char ch;
+	int num;
+	long lnum;
 
 	if (format == NULL)
 		return (-1);
-
 	va_start(args, format);
-
 	while (*format)
 	{
 		if (*format != '%')
@@ -28,25 +29,31 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == '\0')
 				return (-1);
-			if (*format == 'd' || *format == 'i')
+			if (*format == 's')
 			{
-				num = va_arg(args, int);
-				count += _putint(num);
+				str = va_arg(args, char *);
+				count += _puts(str);
 			}
-			else if (*format == 's')
-				count += _puts(va_arg(args, char *));
 			else if (*format == 'c')
 			{
 				ch = (char)va_arg(args, int);
 				count += _putchar(ch);
+			}
+			else if (*format == 'd')
+			{
+				num = va_arg(args, int);
+				count += _putint(num);
+			}
+			else if (*format == 'l')
+			{
+				lnum = va_arg(args, long);
+				count += _print_long(lnum);
 			}
 			else
 				count += _putchar('%') + _putchar(*format);
 		}
 		format++;
 	}
-
 	va_end(args);
-
 	return (count);
 }

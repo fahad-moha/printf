@@ -16,13 +16,13 @@ int _printf(const char *format, ...)
 
 	if (format == NULL)
 		return (-1);
+
 	va_start(args, format);
 	while (*format)
 	{
 		if (*format != '%')
 		{
-			_putchar(*format);
-			count++;
+			_putchar(*format), count++;
 		}
 		else
 		{
@@ -30,25 +30,19 @@ int _printf(const char *format, ...)
 			if (*format == '\0')
 				return (-1);
 			if (*format == 'd' || *format == 'i')
-			{
-				num = va_arg(args, int);
-				count += _putint(num);
-			}
+				count += _putint(va_arg(args, int));
 			else if (*format == 's')
 				count += _puts(va_arg(args, char *));
 			else if (*format == 'c')
-			{
-				ch = (char)va_arg(args, int);
-				count += _putchar(ch);
-			}
+				ch = (char)va_arg(args, int), count += _putchar(ch);
+			else if (*format == '%')
+				_putchar('%'), count++;
 			else
-				count += _putchar('%') + _putchar(*format);
+				_putchar('%'), _putchar(*format), count += 2;
 		}
 		format++;
 	}
-
 	va_end(args);
 
 	return (count);
 }
-

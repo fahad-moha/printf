@@ -8,16 +8,14 @@
  */
 int _puts(char *str)
 {
-	int i;
+	int count = 0;
 
 	if (str == NULL)
+		str = "(null)";
+	while (*str)
 	{
-		_puts("(null)");
-		return (6);
+		count += _putchar(*str);
+		str++;
 	}
-
-	for (i = 0; str[i]; i++)
-		_putchar(str[i]);
-
-	return (i);
+	return (count);
 }

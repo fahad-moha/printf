@@ -18,23 +18,28 @@ int _printf(const char *format, ...)
 		return (-1);
 
 	va_start(args, format);
+
 	while (*format)
 	{
 		if (*format != '%')
-		{
-			_putchar(*format), count++;
-		}
+			count += _putchar(*format);
 		else
 		{
 			format++;
 			if (*format == '\0')
 				return (-1);
 			if (*format == 'd' || *format == 'i')
-				count += _putint(va_arg(args, int));
+			{
+				num = va_arg(args, int);
+				count += _putint(num);
+			}
 			else if (*format == 's')
 				count += _puts(va_arg(args, char *));
 			else if (*format == 'c')
-				ch = (char)va_arg(args, int), count += _putchar(ch);
+			{
+				ch = (char)va_arg(args, int);
+				count += _putchar(ch);
+			}
 			else if (*format == '%')
 				_putchar('%'), count++;
 			else
@@ -46,3 +51,4 @@ int _printf(const char *format, ...)
 
 	return (count);
 }
+

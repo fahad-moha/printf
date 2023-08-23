@@ -29,6 +29,12 @@ String: printf("%s", 'This is a string.'); Output: This is a string.
 
 Integer: printf("%i", 5); Output: 5
 
+## Built With
+
+* [Ubuntu](https://ubuntu.com/)
+* [GitHub](https://github.com/)
+
+
 # Project Requirements
 - Allowed editors: `vi`, `vim`, `emacs`
 - All your files will be compiled on Ubuntu 14.04 LTS
